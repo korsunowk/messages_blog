@@ -15,7 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from messages_blog import views
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^$', views.CommentListView.as_view(), name='blog')
 ]
