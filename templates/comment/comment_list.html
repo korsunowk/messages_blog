@@ -3,7 +3,7 @@
 <ul>
     {% recursetree comments %}
         <li>
-            {{ node.user.username }} <p>{{ node.content }}</p>
+            <p>{{ node.user.username }} : {{ node.text }}</p>
             {% if not node.is_leaf_node %}
                 <ul class="children">
                     {{ children }}

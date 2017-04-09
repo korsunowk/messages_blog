@@ -15,10 +15,13 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from messages_blog import views
+from django.conf.urls.static import static
+
+from messages_blog import views, settings
 
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', views.CommentListView.as_view(), name='blog')
-]
+    url(r'^$', views.CommentListView.as_view(), name='blog'),
+    url(r'^create/', views.CommentCreateView.as_view(), name='create_comment')
+] + static(settings.STATIC_URL, document_root=settings.STATIC_URL)
