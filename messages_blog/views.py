@@ -1,3 +1,4 @@
+from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib.auth.models import User
 from django.contrib import auth
@@ -16,7 +17,9 @@ class CallbackView(generic.View):
 
     @staticmethod
     def vk_callback(request):
-        resp, content = Http().request(uri=settings.VK_URL + request.GET.get('code', ''), method='GET')
+        resp, content = Http().request(
+            uri=settings.VK_URL + request.GET.get('code', ''),
+            method='GET')
 
         content = json.loads(content.decode('ascii'))
         token = content['access_token']
@@ -37,16 +40,17 @@ class CallbackView(generic.View):
             )
 
         auth.login(request, new_user)
-        return redirect('/')
+        return redirect(reverse_lazy('comment:blog'))
 
     @staticmethod
     def facebook_callback(request):
 
         code = request.GET.get('code', False)
-        resp, content = Http().request(uri=settings.FACEBOOK_URL % (settings.FACEBOOK_APP,
-                                                                    settings.FACEBOOK_SECRET,
-                                                                    code),
-                                       method='GET')
+        resp, content = Http().request(
+            uri=settings.FACEBOOK_URL % (settings.FACEBOOK_APP,
+                                         settings.FACEBOOK_SECRET,
+                                         code),
+            method='GET')
 
         content = json.loads(content.decode('ascii'))
         token = content['access_token']
@@ -63,7 +67,7 @@ class CallbackView(generic.View):
                 password=new_user_data['id']
             )
         auth.login(request, new_user)
-        return redirect('/')
+        return redirect(reverse_lazy('comment:blog'))
 
     @staticmethod
     def github_callback(request):
@@ -88,4 +92,4 @@ class CallbackView(generic.View):
                 password=content['id']
             )
         auth.login(request, new_user)
-        return redirect('/')
+        return redirect(reverse_lazy('comment:blog'))

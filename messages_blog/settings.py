@@ -50,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'messages_blog.middleware.Redirect404Middleware'
 ]
 
 ROOT_URLCONF = 'messages_blog.urls'

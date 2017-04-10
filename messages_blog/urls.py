@@ -16,10 +16,11 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.conf.urls.static import static
+from django.urls import reverse_lazy
 from django.views.generic import RedirectView, TemplateView
 
-from messages_blog import settings, views
 
+from messages_blog import settings, views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -35,3 +36,5 @@ urlpatterns = [
     url(r'^github_login/', RedirectView.as_view(url=settings.GITHUB_REDIRECT), name='github_login'),
     url(r'^github_callback/', views.CallbackView().github_callback, name='github_callback')
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_URL)
+
+handler404 = RedirectView.as_view(url=reverse_lazy('comment:blog'))

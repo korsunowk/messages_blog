@@ -1,5 +1,6 @@
 from django.http import JsonResponse
 from django.template.loader import render_to_string
+from django.urls import reverse_lazy
 from django.views import generic
 from comment.models import Comment
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -12,7 +13,7 @@ class CommentListView(generic.ListView):
 
 class CommentCreateView(generic.CreateView, LoginRequiredMixin):
     model = Comment
-    success_url = '/'
+    success_url = reverse_lazy('comment:blog')
 
     def post(self, request, *args, **kwargs):
         text = self.request.POST.get('text', None)
@@ -41,7 +42,7 @@ class CommentCreateView(generic.CreateView, LoginRequiredMixin):
 
 class CommentUpdateView(generic.UpdateView, LoginRequiredMixin):
     model = Comment
-    success_url = '/'
+    success_url = reverse_lazy('comment:blog')
 
     def post(self, request, *args, **kwargs):
         new_text = self.request.POST.get('text', None)
@@ -56,7 +57,7 @@ class CommentUpdateView(generic.UpdateView, LoginRequiredMixin):
 
 class CommentDeleteView(generic.DeleteView, LoginRequiredMixin):
     model = Comment
-    success_url = '/'
+    success_url = reverse_lazy('comment:blog')
 
     def post(self, request, *args, **kwargs):
         comment = self.get_object()
