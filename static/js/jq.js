@@ -25,7 +25,6 @@ $(document).ready(function () {
         var send_button = $(this);
         var link = $(this).data('url');
         var text = $(this).parent().find('input');
-        console.log(text.val());
         if (text.val() != undefined && text.val() != ''){
             send_button.attr('disabled', 'disabled');
 
@@ -39,6 +38,10 @@ $(document).ready(function () {
                 success: function (data) {
                     text.val('');
                     send_button.removeAttr('disabled');
+                    if (data.success == true){
+                        $('ul.parents').prepend(data.new_comment);
+                    }
+
                 }
             });
 

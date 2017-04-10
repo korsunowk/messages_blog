@@ -1,0 +1,10 @@
+<li>
+    <p>{{ node.user.username }} : {{ node.text }}, {{ node.created }}
+        <a href="javascript://"
+           data-url="{% url 'create_comment' %}"
+           data-parent="{{ node.id }}"
+        >(ответить)</a>
+    </p>
+    {% if node.is_leaf_node %}
+        </li>
+    {% endif %}

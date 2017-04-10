@@ -13,10 +13,12 @@
     <script type="text/javascript" src="{% static 'js/jq.js' %}"></script>
 </head>
 <body>
-    <div class="add-new-comment">
-        <input type="text" class="new-comment">
-        <button class="add-comment" data-url="{% url 'create_comment' %}">Add new comment</button>
-    </div>
+    <form action="">
+        <div class="add-new-comment">
+            <input type="text" class="new-comment">
+            <button class="add-comment" data-url="{% url 'create_comment' %}">Add new comment</button>
+        </div>
+    </form>
         {% csrf_token %}
     {% include "comment/comment_list.html" with comments=object_list only %}
 </body>
