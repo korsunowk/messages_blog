@@ -125,3 +125,24 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
+
+VK_REDIRECT = 'https://oauth.vk.com/authorize?client_id=5649330&display=page&' \
+              'redirect_uri=http://127.0.0.1:8000/vk_callback&scope=email&response_type=code&v=5.56&revoke=1'
+VK_CLIENT = 5649330
+VK_SECRET = 'qZjV2yMgO092tVjKJ2AP'
+VK_URL = 'https://oauth.vk.com/access_token?client_id={client}&' \
+         'client_secret={secret}&' \
+         'redirect_uri=http://127.0.0.1:8000/vk_callback&' \
+         'code='.format(secret=VK_SECRET, client=VK_CLIENT)
+
+
+FACEBOOK_URL = 'https://graph.facebook.com/v2.7/oauth/access_token?client_id=%s&' \
+               'client_secret=%s&' \
+               'redirect_uri=http://127.0.0.1:8000/facebook_callback/&'\
+               'code=%s'
+
+FACEBOOK_APP = '287909741602075'
+FACEBOOK_SECRET = 'f1a5daa6763ac26ab0bab497bc1741c2'
+FACEBOOK_TOKEN = '287909741602075|gWwnWP5-PJN-6VZxmbSuGYQlNCI'
+FACEBOOK_REDIRECT = 'https://www.facebook.com/v2.7/dialog/oauth?' \
+                    'client_id=%s&redirect_uri=http://127.0.0.1:8000/facebook_callback/' % FACEBOOK_APP

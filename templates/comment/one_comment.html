@@ -25,11 +25,13 @@
                 class="delete-comment"
             ><i class="fa fa-times" aria-hidden="true"></i></a>
         {% endif %}
-        <a href="javascript://"
-           data-url="{% url 'comment:create_comment' %}"
-           data-parent="{{ node.id }}"
-           class="add-child"
-        >(ответить)</a>
+        {% if user.is_authenticated %}
+            <a href="javascript://"
+               data-url="{% url 'comment:create_comment' %}"
+               data-parent="{{ node.id }}"
+               class="add-child"
+            >(ответить)</a>
+        {% endif %}
 
     </p>
     {% if node.is_leaf_node %}

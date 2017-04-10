@@ -1,0 +1,18 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login page</title>
+    <link rel="stylesheet" href="{% static 'css/css.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/bootstrap-social.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="login-with-social">
+        <a href="{% url 'vk_login' %}" class="btn btn-social btn-vk"><span class="fa fa-vk"></span>VKontakte</a>
+        <a href="{% url 'facebook_login' %}" class="btn btn-social btn-facebook"><span class="fa fa-facebook"></span><p>Facebook</p></a>
+    </div>
+</body>
+</html>
