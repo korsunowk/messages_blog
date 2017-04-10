@@ -11,3 +11,6 @@ class Comment(MPTTModel):
 
     def __str__(self):
         return "{0}: {1}".format(self.user.username, self.text)
+
+    class MPTTMeta:
+        order_insertion_by = ['-created']

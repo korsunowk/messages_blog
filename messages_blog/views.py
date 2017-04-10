@@ -8,6 +8,10 @@ class CommentListView(generic.ListView):
     model = Comment
     template_name = 'blog.html'
 
+    def get_queryset(self):
+        queryset = super(CommentListView, self).get_queryset()
+        return queryset
+
 
 class CommentCreateView(generic.CreateView, LoginRequiredMixin):
     model = Comment

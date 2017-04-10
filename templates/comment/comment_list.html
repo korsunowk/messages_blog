@@ -1,14 +1,15 @@
 {% load mptt_tags %}
+{% load edited_recursetree %}
 
 <ul>
-    {% recursetree comments %}
+    {% recursetree_edited comments created %}
         <li>
-            <p>{{ node.user.username }} : {{ node.text }}</p>
+            <p>{{ node.user.username }} : {{ node.text }}, {{ node.created }} <span>(ответить)</span></p>
             {% if not node.is_leaf_node %}
                 <ul class="children">
                     {{ children }}
                 </ul>
             {% endif %}
         </li>
-    {% endrecursetree %}
+    {% endrecursetree_edited %}
 </ul>
