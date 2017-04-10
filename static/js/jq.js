@@ -30,27 +30,45 @@ $(document).ready(function () {
         if (text.val() != undefined && text.val() != ''){
             send_button.attr('disabled', 'disabled');
 
-            $.ajax({
-                url: link,
-                data: {
-                    csrfmiddlewaretoken: csrftoken,
-                    text: text.val(),
-                    parent: parent
-                },
-                type: 'post',
-                success: function (data) {
-                    text.val('');
-                    send_button.removeAttr('disabled');
-                    if (data.success == true){
-                        if (data.parent == false){
-                            send_button.parents('form').parent().append(data.new_comment);
-                            send_button.parents('form').remove();
+            if ($(this).attr('data-update') == 'false')
+                $.ajax({
+                    url: link,
+                    data: {
+                        csrfmiddlewaretoken: csrftoken,
+                        text: text.val(),
+                        parent: parent
+                    },
+                    type: 'post',
+                    success: function (data) {
+                        text.val('');
+                        send_button.removeAttr('disabled');
+                        if (data.success == true){
+                            if (data.parent == false){
+                                send_button.parents('form').parent().append(data.new_comment);
+                                send_button.parents('form').remove();
+                            }
+                            else
+                                $('ul.parents').prepend(data.new_comment);
                         }
-                        else
-                            $('ul.parents').prepend(data.new_comment);
                     }
-                }
-            });
+                });
+            else
+                $.ajax({
+                    url: link,
+                    data: {
+                        csrfmiddlewaretoken: csrftoken,
+                        text: text.val()
+                    },
+                    type: 'post',
+                    success: function (data) {
+                        $('#comment.commenting').remove();
+                        send_button.removeAttr('disabled');
+                        if (data.success == true){
+                            $('.comment-text.update').html(data.new_text);
+                            $('.comment-text').removeClass('update');
+                        }
+                    }
+                });
 
             e.preventDefault();
             e.stopPropagation();
@@ -64,6 +82,21 @@ $(document).ready(function () {
         $(this).parent().after(new_form);
         new_form.addClass('commenting');
         new_form.find('button').attr('data-parent', $(this).data('parent'));
+    });
+
+    $('body').on('click', 'a.update-comment', function (e) {
+       $('#comment.commenting').remove();
+
+       var update_form = $('#comment').clone(true, true);
+       $(this).parent().after(update_form);
+       update_form.addClass('commenting');
+       var update_button = update_form.find('button');
+
+       update_button.attr('data-update', 'true');
+       update_button.html(update_button.attr('data-update-text'));
+       update_button.attr('data-url', $(this).attr('data-url'));
+       update_form.find('input').val($(this).parent().find('.comment-text').html());
+       $(this).parent().find('.comment-text').addClass('update');
     });
 
 });

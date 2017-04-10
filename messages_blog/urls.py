@@ -23,5 +23,6 @@ from messages_blog import views, settings
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.CommentListView.as_view(), name='blog'),
-    url(r'^create/', views.CommentCreateView.as_view(), name='create_comment')
+    url(r'^create/', views.CommentCreateView.as_view(), name='create_comment'),
+    url(r'update/(?P<pk>\d+)/$', views.CommentUpdateView.as_view(), name='update_comment')
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_URL)

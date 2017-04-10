@@ -3,7 +3,7 @@
 
 <ul class="parents">
     {% recursetree_edited comments created %}
-            {% include 'comment/one_comment.html' with node=node %}
+            {% include 'comment/one_comment.html' with node=node user=user %}
             {% if not node.is_leaf_node %}
                 <ul class="children">
                     {{ children }}

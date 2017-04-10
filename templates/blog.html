@@ -11,15 +11,21 @@
       crossorigin="anonymous">
     </script>
     <script type="text/javascript" src="{% static 'js/jq.js' %}"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 </head>
 <body>
     <form id="comment" action="">
         <div class="add-new-comment">
             <input type="text" class="new-comment">
-            <button class="add-comment" data-url="{% url 'create_comment' %}">Add new comment</button>
+            <button class="add-comment"
+                    data-url="{% url 'create_comment' %}"
+                    data-update="false"
+                    data-update-text="Update comment"
+            >Add new comment</button>
         </div>
     </form>
         {% csrf_token %}
-    {% include "comment/comment_list.html" with comments=object_list only %}
+    {% include "comment/comment_list.html" with comments=object_list user=request.user only %}
 </body>
 </html>

@@ -9,10 +9,6 @@ class CommentListView(generic.ListView):
     model = Comment
     template_name = 'blog.html'
 
-    def get_queryset(self):
-        queryset = super(CommentListView, self).get_queryset()
-        return queryset
-
 
 class CommentCreateView(generic.CreateView, LoginRequiredMixin):
     model = Comment
@@ -39,4 +35,19 @@ class CommentCreateView(generic.CreateView, LoginRequiredMixin):
                                      child=new_comment.id,
                                      parent=True if parent is None else False))
 
+        return JsonResponse(dict(success=False))
+
+
+class CommentUpdateView(generic.UpdateView, LoginRequiredMixin):
+    model = Comment
+    success_url = '/'
+
+    def post(self, request, *args, **kwargs):
+        new_text = self.request.POST.get('text', None)
+        comment = self.get_object()
+
+        if new_text and self.request.user == comment.user:
+            comment.text = new_text
+            comment.save()
+            return JsonResponse(dict(success=True, new_text=new_text))
         return JsonResponse(dict(success=False))
