@@ -18,24 +18,30 @@
 <body>
 <br><br>
     {% if request.user.is_authenticated %}
+        <div class="account-place">
+            <span>
+                Добрый день, {{ request.user.username }}.
+                <a href="{% url "logout" %}?next=/" class="logout-button">Logout</a>
+            </span>
+        </div>
         <div class="flex-block">
             <form id="comment" action="">
                 <div class="add-new-comment">
-                    <input type="text" class="new-comment">
+                    <textarea name="text" class="new-comment" cols="110" rows="4" placeholder="Текст сообщения"></textarea>
                     <button class="add-comment"
                             data-url="{% url 'comment:create_comment' %}"
                             data-update="false"
-                            data-update-text="Update comment"
-                    >Add new comment</button>
+                            data-update-text="Изменить"
+                    >Отправить</button>
                 </div>
                 {% csrf_token %}
             </form>
-            <div class="account-place">
-                Добрый день, {{ request.user.username }}<a href="{% url "logout" %}?next=/" class="logout-button">Logout</a>
-            </div>
         </div>
     {% else %}
-        <span class="login-text">*Для добавления и комментирования сообщений выполните <a href="{% url 'login_page' %}">вход</a></span>
+        <span class="login-text">
+            *Для добавления и комментирования сообщений выполните
+            <a href="{% url 'login_page' %}">вход</a>.
+        </span>
     {% endif %}
     {% include "comment/comment_list.html" with comments=object_list user=request.user only %}
 </body>

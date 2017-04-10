@@ -24,7 +24,7 @@ $(document).ready(function () {
     $('.add-comment').click(function (e) {
         var send_button = $(this);
         var link = $(this).data('url');
-        var text = $(this).parent().find('input');
+        var text = $(this).parent().find('textarea');
         var parent = $(this).data('parent');
 
         if (text.val() != undefined && text.val() != ''){
@@ -81,6 +81,7 @@ $(document).ready(function () {
         $('#comment.commenting').remove();
 
         var new_form = $('#comment').clone(true, true);
+        new_form.find('textarea').val('');
         $(this).parent().after(new_form);
         new_form.addClass('commenting');
         new_form.find('button').attr('data-parent', $(this).data('parent'));
@@ -97,7 +98,7 @@ $(document).ready(function () {
        update_button.attr('data-update', 'true');
        update_button.html(update_button.attr('data-update-text'));
        update_button.attr('data-url', $(this).attr('data-url'));
-       update_form.find('input').val($(this).parent().find('.comment-text').html());
+       update_form.find('textarea').val($(this).parent().find('.comment-text').html());
        $(this).parent().find('.comment-text').addClass('update');
     });
 

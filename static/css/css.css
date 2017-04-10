@@ -35,16 +35,59 @@ li {
     margin: 50px;
 }
 
-.account-place {
-    margin-right: 50%;
+.account-place span {
+    margin-left: 50px;
+}
+
+textarea {
+    border: 1px solid black;
+    resize: none;
+    overflow: auto;
+}
+
+button.add-comment {
+    width: 115px;
+    height: 33px;
+    font-size: 16px;
+    margin-left: 15px;
+}
+
+.add-new-comment {
+    display: flex;
+    align-items: center;
+}
+
+ul.parents {
+    border: 1px solid black;
+    padding: 10px;
+    margin-left: 50px;
+    width: 60%;
 }
 
 .logout-button {
     margin-left: 20px;
 }
 
-.login-with-social {
+.login-with-social, .login-block {
     display: flex;
     justify-content: center;
-    margin-top: 20%;
+}
+
+.login-block {
+    flex-direction: column;
+    margin-top: 15%;
+}
+
+.login-with-social-text {
+    text-align: center;
+    font-size: 19px;
+    margin-bottom: 20px;
+}
+
+.login-with-social a.btn {
+    display: flex;
+    align-items: center;
+    margin-right: 21px;
+    font-size: 16px;
+    min-width: 125px;
 }
