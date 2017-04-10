@@ -45,6 +45,8 @@ $(document).ready(function () {
                         if (data.success == true){
                             if (data.parent == false){
                                 send_button.parents('form').parent().append(data.new_comment);
+                                if (!send_button.parents('li').find('.fa-play').hasClass('fa-rotate-90'))
+                                    send_button.parents('li').find('.fa-play').click();
                                 send_button.parents('form').remove();
                             }
                             else
