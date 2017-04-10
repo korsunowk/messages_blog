@@ -25,6 +25,7 @@ $(document).ready(function () {
         var send_button = $(this);
         var link = $(this).data('url');
         var text = $(this).parent().find('input');
+        var parent = $(this).data('parent');
         if (text.val() != undefined && text.val() != ''){
             send_button.attr('disabled', 'disabled');
 
@@ -33,15 +34,21 @@ $(document).ready(function () {
                 data: {
                     csrfmiddlewaretoken: csrftoken,
                     text: text.val(),
+                    parent: parent
                 },
                 type: 'post',
                 success: function (data) {
                     text.val('');
                     send_button.removeAttr('disabled');
                     if (data.success == true){
-                        $('ul.parents').prepend(data.new_comment);
+                        if (data.parent == false){
+                            send_button.parents('form').parent().append(data.new_comment);
+                            $('a.add-child[data-parent='+ data.child +']').delegate();
+                            send_button.parents('form').remove();
+                        }
+                        else
+                            $('ul.parents').prepend(data.new_comment);
                     }
-
                 }
             });
 
@@ -49,4 +56,15 @@ $(document).ready(function () {
             e.stopPropagation();
         }
     });
+
+    $('body').on('click', 'a.add-child', function (e) {
+        $('#comment.commenting').remove();
+
+        var new_form = $('#comment').clone(true, true);
+        $(this).parent().after(new_form);
+        new_form.addClass('commenting');
+        new_form.find('button').attr('data-parent', $(this).data('parent'));
+        new_form.delegate();
+    });
+
 });

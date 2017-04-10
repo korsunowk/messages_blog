@@ -1,10 +1,19 @@
+{% if new_child %}
+    <ul class="children">
+{% endif %}
+
 <li>
     <p>{{ node.user.username }} : {{ node.text }}, {{ node.created }}
         <a href="javascript://"
            data-url="{% url 'create_comment' %}"
            data-parent="{{ node.id }}"
+           class="add-child"
         >(ответить)</a>
     </p>
     {% if node.is_leaf_node %}
         </li>
     {% endif %}
+
+{% if new_child %}
+    </ul>
+{% endif %}
