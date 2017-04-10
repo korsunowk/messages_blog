@@ -23,7 +23,7 @@ $(document).ready(function () {
 
     $('.add-comment').click(function (e) {
         var send_button = $(this);
-        var link = $(this).data('url');
+        var link = $(this).attr('data-url');
         var text = $(this).parent().find('textarea');
         var parent = $(this).data('parent');
 
