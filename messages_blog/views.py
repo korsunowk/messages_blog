@@ -2,12 +2,14 @@ from django.views import generic
 from django.contrib.auth.models import User
 from django.contrib import auth
 from django.shortcuts import redirect
+
+from messages_blog import settings
+
 import facebook
 import json
 from httplib2 import Http
 import requests
 import vk
-from messages_blog import settings
 
 
 class CallbackView(generic.View):
@@ -59,6 +61,31 @@ class CallbackView(generic.View):
                 username=username,
                 email=new_user_data['email'],
                 password=new_user_data['id']
+            )
+        auth.login(request, new_user)
+        return redirect('/')
+
+    @staticmethod
+    def github_callback(request):
+        code = request.GET.get('code', False)
+        res = requests.post(settings.GITHUB_TOKEN_URL,
+                            data={'client_id': settings.GITHUB_CLIENT,
+                                  'client_secret': settings.GITHUB_SECRET,
+                                  'code': code})
+        content = res.content.decode('utf-8')
+
+        token = content.split('&')[0].replace('access_token=', '')
+        res = requests.get(settings.GITHUB_USER_URL,
+                           {'access_token': token})
+        content = res.json()
+
+        if User.objects.filter(username=content['name']).exists():
+            new_user = User.objects.get(username=content['name'])
+        else:
+            new_user = User.objects.create_user(
+                username=content['name'],
+                email=content['email'],
+                password=content['id']
             )
         auth.login(request, new_user)
         return redirect('/')

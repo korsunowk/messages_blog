@@ -29,7 +29,9 @@ urlpatterns = [
     url(r'login_page/', TemplateView.as_view(template_name='login_page.html'), name='login_page'),
     url(r'^vk_login/$', RedirectView.as_view(url=settings.VK_REDIRECT), name='vk_login'),
     url(r'^vk_callback/', views.CallbackView().vk_callback, name='vk_callback'),
-    url(r'facebook_callback/', views.CallbackView().facebook_callback, name='facebook_callback'),
-    url(r'facebook_login/', RedirectView.as_view(url=settings.FACEBOOK_REDIRECT),
-        name='facebook_login')
+    url(r'^facebook_callback/', views.CallbackView().facebook_callback, name='facebook_callback'),
+    url(r'^facebook_login/', RedirectView.as_view(url=settings.FACEBOOK_REDIRECT),
+        name='facebook_login'),
+    url(r'^github_login/', RedirectView.as_view(url=settings.GITHUB_REDIRECT), name='github_login'),
+    url(r'^github_callback/', views.CallbackView().github_callback, name='github_callback')
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_URL)

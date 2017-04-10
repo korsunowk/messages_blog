@@ -146,3 +146,9 @@ FACEBOOK_SECRET = 'f1a5daa6763ac26ab0bab497bc1741c2'
 FACEBOOK_TOKEN = '287909741602075|gWwnWP5-PJN-6VZxmbSuGYQlNCI'
 FACEBOOK_REDIRECT = 'https://www.facebook.com/v2.7/dialog/oauth?' \
                     'client_id=%s&redirect_uri=http://127.0.0.1:8000/facebook_callback/' % FACEBOOK_APP
+
+GITHUB_CLIENT = 'e9f4d5201804928d1754'
+GITHUB_SECRET = '5e5d98d483eac2b47fc0f89ee03512a1e75ed7ea'
+GITHUB_REDIRECT = 'https://github.com/login/oauth/authorize?scope=user:email&client_id=' + GITHUB_CLIENT
+GITHUB_TOKEN_URL = 'https://github.com/login/oauth/access_token'
+GITHUB_USER_URL = 'https://api.github.com/user?'
