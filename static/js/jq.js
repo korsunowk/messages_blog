@@ -124,4 +124,9 @@ $(document).ready(function () {
 
     });
 
+    $('body').on('click', '.fa-play', function (e) {
+       $(this).toggleClass('fa-rotate-90');
+       $(this).parent().parent().find('.children').first().slideToggle();
+    });
+
 });

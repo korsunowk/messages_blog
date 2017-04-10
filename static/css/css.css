@@ -2,3 +2,15 @@ li {
     position: relative;
     overflow: hidden;
 }
+
+.fa-file-text-o, .fa-play {
+    padding-right: 6px;
+}
+
+.parents > li > .children {
+    display: none;
+}
+
+.new-child {
+    display: block;
+}

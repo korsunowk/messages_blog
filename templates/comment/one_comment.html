@@ -1,9 +1,17 @@
 {% if new_child %}
-    <ul class="children">
+    <ul class="children new-child">
 {% endif %}
 
 <li>
-    <p>{{ node.user.username }} : <span class="comment-text">{{ node.text }}</span>, {{ node.created }}
+    <p>
+        {% if node.parent %}
+            <i class="fa fa-file-text-o" aria-hidden="true"></i>
+        {% else %}
+            <i class="fa fa-play fa-lg" aria-hidden="true"></i>
+        {% endif %}
+
+        {{ node.user.username }} : <span class="comment-text">{{ node.text }}</span>, {{ node.created }}
+
         {% if user == node.user %}
             <a href="javascript://"
                 data-url="{% url 'comment:update_comment' node.id %}"
