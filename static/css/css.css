@@ -62,6 +62,8 @@ ul.parents {
     padding: 10px;
     margin-left: 50px;
     width: 60%;
+    min-height: 500px;
+    overflow: auto;
 }
 
 .logout-button {
