@@ -10,7 +10,10 @@
             <i class="fa fa-play fa-lg" aria-hidden="true"></i>
         {% endif %}
 
-        {{ node.user.username }} : <span class="comment-text">{{ node.text }}</span>, {{ node.created }}
+        <span class="comment-date">
+            ({{ node.created|date:"D, j N Y, h:i a" }})
+        </span>
+        <span class="comment-text">{{ node.text }}</span>
 
         {% if user == node.user %}
             <a href="javascript://"

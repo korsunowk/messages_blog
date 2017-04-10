@@ -14,3 +14,12 @@ li {
 .new-child {
     display: block;
 }
+
+.comment-text {
+    padding-right: 6px;
+}
+
+.comment-date {
+    font: 9pt Verdana;
+    color: #b8bba4;
+}
