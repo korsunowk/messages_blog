@@ -26,6 +26,7 @@ $(document).ready(function () {
         var link = $(this).data('url');
         var text = $(this).parent().find('input');
         var parent = $(this).data('parent');
+
         if (text.val() != undefined && text.val() != ''){
             send_button.attr('disabled', 'disabled');
 
@@ -43,7 +44,6 @@ $(document).ready(function () {
                     if (data.success == true){
                         if (data.parent == false){
                             send_button.parents('form').parent().append(data.new_comment);
-                            $('a.add-child[data-parent='+ data.child +']').delegate();
                             send_button.parents('form').remove();
                         }
                         else
@@ -64,7 +64,6 @@ $(document).ready(function () {
         $(this).parent().after(new_form);
         new_form.addClass('commenting');
         new_form.find('button').attr('data-parent', $(this).data('parent'));
-        new_form.delegate();
     });
 
 });

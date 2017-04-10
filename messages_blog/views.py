@@ -31,10 +31,12 @@ class CommentCreateView(generic.CreateView, LoginRequiredMixin):
             )
 
             new_comment_str = render_to_string('comment/one_comment.html',
-                                           {'node': new_comment,
-                                            'new_child': parent})
+                                               {'node': new_comment,
+                                                'new_child': parent})
+
             return JsonResponse(dict(success=True,
                                      new_comment=new_comment_str,
                                      child=new_comment.id,
                                      parent=True if parent is None else False))
+
         return JsonResponse(dict(success=False))
