@@ -99,4 +99,29 @@ $(document).ready(function () {
        $(this).parent().find('.comment-text').addClass('update');
     });
 
+    $('body').on('click', 'a.delete-comment', function (e) {
+       var comment = $(this).parent().parent();
+
+       if (!$(this).hasClass('in-process'))
+       {
+           $(this).addClass('in-process');
+           $.ajax({
+               url: $(this).data('url'),
+               data: {
+                   csrfmiddlewaretoken: csrftoken
+               },
+               type: 'post',
+               success: function (data) {
+                   if (data.success == true)
+                       comment.slideUp();
+                   $(this).removeClass('in-process');
+               }
+           });
+       }
+
+        e.preventDefault();
+        e.stopPropagation();
+
+    });
+
 });

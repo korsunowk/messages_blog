@@ -28,7 +28,8 @@ class CommentCreateView(generic.CreateView, LoginRequiredMixin):
 
             new_comment_str = render_to_string('comment/one_comment.html',
                                                {'node': new_comment,
-                                                'new_child': parent})
+                                                'new_child': parent,
+                                                'user': self.request.user})
 
             return JsonResponse(dict(success=True,
                                      new_comment=new_comment_str,
@@ -50,4 +51,17 @@ class CommentUpdateView(generic.UpdateView, LoginRequiredMixin):
             comment.text = new_text
             comment.save()
             return JsonResponse(dict(success=True, new_text=new_text))
+        return JsonResponse(dict(success=False))
+
+
+class CommentDeleteView(generic.DeleteView, LoginRequiredMixin):
+    model = Comment
+    success_url = '/'
+
+    def post(self, request, *args, **kwargs):
+        comment = self.get_object()
+
+        if self.request.user == comment.user:
+            comment.delete()
+            return JsonResponse(dict(success=True))
         return JsonResponse(dict(success=False))

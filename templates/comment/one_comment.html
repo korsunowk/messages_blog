@@ -6,13 +6,16 @@
     <p>{{ node.user.username }} : <span class="comment-text">{{ node.text }}</span>, {{ node.created }}
         {% if user == node.user %}
             <a href="javascript://"
-                data-url="{% url 'update_comment' node.id %}"
+                data-url="{% url 'comment:update_comment' node.id %}"
                 class="update-comment"
             ><i class="fa fa-pencil" aria-hidden="true"></i></a>
+            <a href="javascript://"
+                data-url="{% url 'comment:delete_comment' node.id %}"
+                class="delete-comment"
+            ><i class="fa fa-times" aria-hidden="true"></i></a>
         {% endif %}
-
         <a href="javascript://"
-           data-url="{% url 'create_comment' %}"
+           data-url="{% url 'comment:create_comment' %}"
            data-parent="{{ node.id }}"
            class="add-child"
         >(ответить)</a>
