@@ -1,3 +1,3 @@
 django==1.11
 django-mptt==0.8.7
-facebook
+facebook-sdk
