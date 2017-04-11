@@ -7,6 +7,14 @@ li {
     padding-right: 6px;
 }
 
+.fa-play, button {
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+}
+
 .parents > li > .children {
     display: none;
 }
@@ -37,6 +45,7 @@ li {
 
 .account-place span {
     margin-left: 50px;
+    font-size: 17px;
 }
 
 textarea {
