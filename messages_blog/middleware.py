@@ -9,3 +9,11 @@ class Redirect404Middleware(MiddlewareMixin):
             return HttpResponsePermanentRedirect(reverse_lazy('comment:blog'))
 
         return response
+
+
+class RedirectAuthUserFromLoginPage(MiddlewareMixin):
+    def process_response(self, request, response):
+        if request.path == reverse_lazy('login_page'):
+            return HttpResponsePermanentRedirect(reverse_lazy('comment:blog'))
+
+        return response
