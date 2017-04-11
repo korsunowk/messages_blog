@@ -47,9 +47,9 @@ class CallbackView(generic.View):
 
         code = request.GET.get('code', False)
         resp, content = Http().request(
-            uri=settings.FACEBOOK_URL % (settings.FACEBOOK_APP,
-                                         settings.FACEBOOK_SECRET,
-                                         code),
+            uri=settings.FACEBOOK_URL.format(client_id=settings.FACEBOOK_APP,
+                                             client_secret=settings.FACEBOOK_SECRET,
+                                             code=code, domain=settings.DOMAIN),
             method='GET')
 
         content = json.loads(content.decode('ascii'))
