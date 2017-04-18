@@ -130,8 +130,8 @@ STATICFILES_DIRS = [
 
 DOMAIN = 'http://127.0.0.1:8000'
 
-VK_CLIENT = 5649330
-VK_SECRET = 'qZjV2yMgO092tVjKJ2AP'
+VK_CLIENT = ''
+VK_SECRET = ''
 
 VK_REDIRECT = 'https://oauth.vk.com/authorize?client_id={client_id}&display=page&' \
               'redirect_uri={domain}/vk_callback&scope=email&' \
@@ -148,15 +148,15 @@ FACEBOOK_URL = 'https://graph.facebook.com/v2.7/oauth/access_token?client_id={cl
                'redirect_uri={domain}/facebook_callback/&'\
                'code={code}'
 
-FACEBOOK_APP = '287909741602075'
-FACEBOOK_SECRET = 'f1a5daa6763ac26ab0bab497bc1741c2'
-FACEBOOK_TOKEN = '287909741602075|gWwnWP5-PJN-6VZxmbSuGYQlNCI'
+FACEBOOK_APP = ''
+FACEBOOK_SECRET = ''
+FACEBOOK_TOKEN = ''
 FACEBOOK_REDIRECT = 'https://www.facebook.com/v2.7/dialog/oauth?' \
                     'client_id={client_id}&redirect_uri={domain}/facebook_callback/'\
     .format(client_id=FACEBOOK_APP, domain=DOMAIN)
 
-GITHUB_CLIENT = 'e9f4d5201804928d1754'
-GITHUB_SECRET = '5e5d98d483eac2b47fc0f89ee03512a1e75ed7ea'
+GITHUB_CLIENT = ''
+GITHUB_SECRET = ''
 GITHUB_REDIRECT = 'https://github.com/login/oauth/authorize?scope=user:email&client_id=' + GITHUB_CLIENT
 GITHUB_TOKEN_URL = 'https://github.com/login/oauth/access_token'
 GITHUB_USER_URL = 'https://api.github.com/user?'
