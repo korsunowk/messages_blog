@@ -2,8 +2,9 @@ from django.http import JsonResponse
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy
 from django.views import generic
-from comment.models import Comment
 from django.contrib.auth.mixins import LoginRequiredMixin
+
+from comment.models import Comment
 
 
 class CommentListView(generic.ListView):
