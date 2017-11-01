@@ -27,8 +27,7 @@ class CallbackView(generic.View):
         email = content['email']
         session = vk.Session(access_token=token)
         new_user_data = vk.API(session=session).users.get(user_ids=user_id)[0]
-        username = "{0} {1}".format(new_user_data['first_name'],
-                                    new_user_data['last_name'])
+        username = "{0} {1}".format(new_user_data['first_name'], new_user_data['last_name'])
 
         if User.objects.filter(username=username).exists():
             new_user = User.objects.get(username=username)
